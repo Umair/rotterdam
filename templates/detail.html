@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="row">
+    <div class="caption">
+        <h3>
+            <small>Dock Name</small>
+            {{ dock }}
+        </h3>
+        <p>
+            <strong>Total Employees on the dock:</strong> {{ total_employees }}<br/>
+            <strong> Total number of ships serviced on this dock:</strong> {{ total_ships_service }}<br/>
+            <strong> Total enqueue ships on this dock:</strong> {{ total_enqueue_ships }}
+        </p>
+    </div>
+
+    <div class="caption">
+        <h3>
+            <small>Current Parked Ship</small>
+            {{ ship }}
+        </h3>
+        <p>
+            {{ ship.description }}
+        </p>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Containers on the ship</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Container Name</th>
+                    <th>Hazard</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in contianer_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.get_hazard_display }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Employees working on the Ship</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>last Name</th>
+                    <th>Address</th>
+                    <th>Bank account</th>
+                    <th>Supervisor</th>
+                    <th>Dock</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in employee_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ item.first_name }}</td>
+                    <td>{{ item.last_name }}</td>
+                    <td>{{ item.address }}</td>
+                    <td>{{ item.bank_account }}</td>
+                    <td>{{ item.supervisor }}</td>
+                    <td>{{ item.dock }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

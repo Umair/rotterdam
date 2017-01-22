@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="starter-template">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Dock Name</th>
+                    <th>Ship Name</th>
+                    <th>Hazard</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in result %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>
+                        <a href="{% url 'dock_detail' id=item.dock.id %}">
+                            {{ item.dock }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if item.ship %}
+                            {{ item.ship }}
+                        {% else %}
+                            No ship Assign
+                        {%  endif %}
+                    </td>
+                    <td>
+                        {% if item.ship %}
+                            {{ item.ship.get_hazard_status }}
+                        {% else %}
+                            No ship Assign
+                        {%  endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
